@@ -1,4 +1,32 @@
-<h3>
-    Navbar.
-    <a href="{% url 'admin:index' %}">Admin</a>
-</h3>
+<header class="header">
+    <nav>
+        <ul class="main-nav" 
+            x-on:resize.window="isMobile = (window.innerWidth < 1000) ? true : false"
+            x-data="{isMobile: (window.innerWidth < 1000) ? true : false}">
+            <div class="first-nav-item" x-show="!isMobile" x-transition.duration.500ms>
+                <a href="{% url 'posts' %}"><li class="main-nav-item">პოსტები</li></a> 
+                <a href="#"><li class="main-nav-item">კატეგორიები</li></a> 
+                
+            </div>
+            <div class="second-nav-item">
+                <a href="{% url 'home' %}"><li class="main-brand"> 🔥 BitCamp Blog</li></a>
+                <i class="bi bi-list" @click="isMobile = !isMobile"></i>
+            </div>
+            <div class="third-nav-item"
+                 x-show="!isMobile" x-transition.duration.500ms>
+                {% comment %} 
+                აქ იქნება if check, თუ მომხმარებელი არაა ავტორიზებული მაშინ ეს
+                {% endcomment %}
+
+                <a href="#"><li class="main-nav-item">ავტორიზაცია</li></a>
+                <a href="#"><li class="main-nav-item">რეგისტრაცია</li></a>
+
+                {% comment %} 
+                თუ მომხმარებელი ავტორიზებულია, მაშინ
+                <a href="#"><li class="main-nav-item">პროფილი</li></a>
+                <a href="#"><li class="main-nav-item">ლოგაუთი</li></a>
+                {% endcomment %}
+            </div>
+        </ul>
+    </nav>
+</header>
