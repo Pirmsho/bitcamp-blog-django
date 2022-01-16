@@ -1,7 +1,7 @@
 <header class="header">
     <nav>
         <ul class="main-nav" 
-            x-on:resize.window="isMobile = (window.innerWidth < 1000) ? true : false"
+            x-on:resize.window.debounce="isMobile = (window.innerWidth < 1000) ? true : false"
             x-data="{isMobile: (window.innerWidth < 1000) ? true : false}">
             <div class="first-nav-item" x-show="!isMobile" x-transition.duration.500ms>
                 <a href="{% url 'posts' %}"><li class="main-nav-item">პოსტები</li></a> 
