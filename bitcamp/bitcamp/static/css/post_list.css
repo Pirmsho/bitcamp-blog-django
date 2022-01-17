@@ -1,0 +1,9 @@
+.posts-section {
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  justify-content: center;
+  gap: 20px 80px;
+}
+.post {
+  border: 1px solid black;
+}
