@@ -1,0 +1,24 @@
+<footer class="footer">
+    <div class="footer-image-div">
+        {% comment %} 
+        აქ იქნება ბითქემფის ლოგო 
+        <a href="{% url 'home' %}">
+            <img src="" alt="" class="bitcamp-logo">
+        </a> 
+        {% endcomment %}
+        <h1>BitCamp logo</h1>
+    </div>
+    <nav class="footer-navigation">
+        <a href="{% url 'posts' %}" class="footer-nav-item">პოსტები</a> 
+        <a href="#" class="footer-nav-item">კატეგორიები</a>
+        {% comment %} 
+        აქ იქნება იგივე if check რაც navbar.html-ში.
+         {% endcomment %}
+        <a href="#" class="footer-nav-item">ავტორიზაცია</a>
+        <a href="#" class="footer-nav-item">რეგისტრაცია</a>
+        {% comment %} 
+        <a href="#" class="footer-nav-item">პროფილი</a>
+        <a href="#" class="footer-nav-item">ლოგაუთი</a>
+         {% endcomment %}
+    </nav>
+</footer>
