@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="{% static '/css/post_list.css' %}">
 {% endblock css_files %}
 
+{% block js_files %}
+ <script src="{% static '/js/post_list.js' %} " defer></script> 
+{% endblock js_files %}
+
 {% block content %}
 
 <h2>
@@ -15,12 +19,15 @@
             <article class="post" >
                 <div class="post-header">
                     <h2>Post Title</h2>
-                    <p class="category">Category</p>
+                    <div class="categories">
+                        <p class="category">Categories</p>
+                    </div>
                     <div class="post-author-div">
                         <div class="author-img"></div>
                         <p class="author-name">Author Name</p>
                     </div>
                 </div>
+                <div class="post-main-image-div"></div>
                 <div class="post-content">
                     <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusantium eligendi eum tenetur, eius quis delectus quaerat odio voluptas eaque, beatae deserunt necessitatibus ut architecto incidunt provident amet quos nesciunt.</p>
                 </div>
