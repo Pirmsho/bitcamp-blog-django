@@ -7,3 +7,12 @@ gsap.from('.main-nav-item', {
   delay: 0.3,
   stagger: 0.1,
 })
+
+gsap.from('.footer-nav-item', {
+  scrollTrigger: '.footer',
+  duration: 0.3,
+  y: '-100%',
+  opacity: 0,
+
+  stagger: 0.2,
+})
