@@ -10,3 +10,7 @@ def home(request):
 def posts(request):
     list = ['post_1', 'post_2', 'post_3', 'post_4']
     return render(request, 'blog/post_list.html', {'list':list})
+
+
+def post(request, pk):
+    return render(request, 'post_detail.html')
