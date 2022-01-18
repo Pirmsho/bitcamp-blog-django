@@ -1,9 +1,7 @@
-from pydoc import describe
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
+from django.utils import timezone
+from accounts.models import Account
 
-# Create your models here.
 
 
 class Category(models.Model):
@@ -15,9 +13,16 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'category'
         verbose_name_plural = 'categories'
-    
-    
+
     def __str__(self) -> str:
         return self.category_name
 
-    
+
+class Post(models.Model):
+    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    title = models.CharField(max_length=124)
+    description = models.CharField(max_length=244)
+    text = models.TextField()
+    category = models.ManyToManyField(Category)
+    image = models.ImageField(upload_to='images/post')
+    create_date = models.DateTimeField(default=timezone.now())
