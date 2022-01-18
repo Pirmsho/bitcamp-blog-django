@@ -171,6 +171,9 @@ a {
   }
 }
 @media (max-width: 1000px) {
+  .content {
+    padding-bottom: 400px;
+  }
   .bi-list {
     display: initial;
   }
