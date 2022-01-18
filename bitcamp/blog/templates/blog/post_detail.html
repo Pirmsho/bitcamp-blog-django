@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-post
+
+
+Post detail Page:
+<h3>
+    {{ post }}
+</h3>
+<h4>
+    Comments
+    <!-- {{ post.comment.all }} -->
+</h4>
+
+
 {% endblock %}

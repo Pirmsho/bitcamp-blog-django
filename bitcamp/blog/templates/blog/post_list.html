@@ -14,6 +14,31 @@
 <h2>
     This is Post list Page!
 </h2>
+<!-- ქვევით არ ვიცი როგორ დავამატო. ასე ვცდილობ გაჩვენო რას გაწვდი ბექიდან. სამი პოსტია დამატებული და ამ სამს აჩვენებს -->
+<!-- პოსტებიდან მარტო მე-3 პოსტის დეტალურ გვერდს ხსნის (/post/3/ ), ვერ გავიგე რატომ და /post/1/ /post/2/ არ ხსნის -->
+{{ posts }}
+<ul>
+    
+    {% for post in posts %}
+    
+    <div style="width: 30%; float: left; padding: 40px;">
+        <li>Author: {{ post.author }}</li>
+        <li>First Name: {{ post.author.first_name }}</li>
+        <li>Last Name: {{ post.author.last_name }}</li>
+        <li><a href="{% url 'blog:post_detail' post.pk %}">Title: {{ post.title }} - {{post.id}} - {{post.pk}} </a></li>
+        <li>Description: {{ post.description }}</li>
+        <li style="height: 100px; overflow: hidden;">Ttext: {{ post.text }}</li>
+        <li>Category: {{ post.category.all }}</li>
+        <li>DATE: {{ post.create_date }}</li>
+        <a href="{% url 'blog:post_detail' pk=post.pk %}">
+            <img src="{{ post.image.url }}" alt="Post image" style="height:320px;">
+        </a>
+        </div>
+{% endfor %}
+</ul>
+
+
+
 <section class="posts-section container" x-data="{posts: [1,2,3,4,5,6,7,8,9,10,11,12]}">
         <template x-for="post in posts">
             <article class="post" >
