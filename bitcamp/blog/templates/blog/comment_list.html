@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>
+    {{ user }}
+</h1>
+<h4>
+    <a href="{% url 'blog:home' %}">Home</a>
+
+</h4>
+Comments:
+{% if comments %}
+<p> Yes Comments </p>
+{% for post in comments %}
+<ol>
+    <li>{{ post.author }}</li>
+    <li>{{ post.text }}</li>
+    <li>{{ post.created_date }}</li>
+    <li>{{ post.post }}
+        <!-- <ul>
+            {% for comment in post.comments.all %}
+            
+            <li>{{ comment.author }}</li>
+            <li>{{ comment.text }}</li>
+            <li>{{ comment.created_date }}</li>
+            <li>
+                <a href="{% url 'comment_detail' pk=comment.pk %}">comment - {{comment.text}}</a>
+            </li>
+            
+            {% endfor %}
+        </ul> -->
+    </li>
+    <li>
+        <a href="{% url 'blog:comment_detail' pk=post.pk %}">Go to link: {{post.text}}</a>
+    </li>
+</ol>
+{% endfor %}
+{%else%}
+
+<p>No comments</p>
+{% endif %}
+
+{% endblock %}
