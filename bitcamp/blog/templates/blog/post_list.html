@@ -25,12 +25,12 @@
         <li>Author: {{ post.author }}</li>
         <li>First Name: {{ post.author.first_name }}</li>
         <li>Last Name: {{ post.author.last_name }}</li>
-        <li><a href="{% url 'blog:post_detail' post.pk %}">Title: {{ post.title }} - {{post.id}} - {{post.pk}} </a></li>
+        <li><a href="{% url 'blog:post' post.pk %}">Title: {{ post.title }} - {{post.id}} - {{post.pk}} </a></li>
         <li>Description: {{ post.description }}</li>
-        <li style="height: 100px; overflow: hidden;">Ttext: {{ post.text }}</li>
+        <li style="height: 100px; overflow: hidden;">Ttext: {{ post.text|safe }}</li>
         <li>Category: {{ post.category.all }}</li>
         <li>DATE: {{ post.create_date }}</li>
-        <a href="{% url 'blog:post_detail' pk=post.pk %}">
+        <a href="{% url 'blog:post' pk=post.pk %}">
             <img src="{{ post.image.url }}" alt="Post image" style="height:320px;">
         </a>
         </div>

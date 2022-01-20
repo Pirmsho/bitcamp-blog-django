@@ -1,7 +1,11 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
+from sqlalchemy import null
 from accounts.models import Account
+from django.contrib.auth.models import User
+from datetime import datetime, date
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -17,18 +21,22 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.category_name
 
+    def get_absolute_url(self):
+        return reverse('home')
+
+
 
 class Post(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
-    title = models.CharField(max_length=124)
-    description = models.CharField(max_length=244)
-    text = models.TextField()
+    text = RichTextField(blank=True, null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category)
     image = models.ImageField(upload_to='post')
-    create_date = models.DateTimeField(default=timezone.now)
     
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={'pk':self.pk})
+        return reverse("blog:post", kwargs={'pk':self.pk})
 
     def __str__(self):
         return self.title
