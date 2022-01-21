@@ -40,16 +40,22 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-create_date']
 
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse("post_list")
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ['-created_date']
