@@ -16,7 +16,7 @@
 </h2>
 <!-- ქვევით არ ვიცი როგორ დავამატო. ასე ვცდილობ გაჩვენო რას გაწვდი ბექიდან. სამი პოსტია დამატებული და ამ სამს აჩვენებს -->
 <!-- პოსტებიდან მარტო მე-3 პოსტის დეტალურ გვერდს ხსნის (/post/3/ ), ვერ გავიგე რატომ. /post/1/ და /post/2/ არ ხსნის -->
-{{ posts }}
+{% comment %} {{ posts }}
 <ul>
     
     {% for post in posts %}
@@ -35,27 +35,39 @@
         </a>
         </div>
 {% endfor %}
-</ul>
+</ul> {% endcomment %}
 
 
 
-<section class="posts-section container" x-data="{posts: [1,2,3,4,5,6,7,8,9,10,11,12]}">
-        <template x-for="post in posts">
+<section class="posts-section container">
+        {% for post in posts %}
             <article class="post" >
                 <div class="post-header">
-                    <h2>Post Title</h2>
+                    <h2><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h2> 
                     <div class="categories">
-                        <p class="category">Categories</p>
-                    </div>.yklv class="author-img"></div>
-                        <p class="author-name">Author Name</p>
+                        {% for category in post.category.all  %}
+                        <p class="category">{{ category }}</p> 
+                        {% endfor %}
+                    </div>
+                    <div class="post-author-div">
+                        <div class="author-img">
+                            {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
+                        </div> 
+                        <p class="author-name">{{ post.author|title }}</p>                     
+
                     </div>
                 </div>
-                <div class="post-main-image-div"></div>
+                <div class="post-main-image-div">
+                    <a href="{% url 'blog:post_detail' post.pk %}">
+                        <img src="{{ post.image.url }}" alt="პოსტის სურათი">
+                    {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
+                    </a>
+                </div>
                 <div class="post-content">
-                    <p class="post-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusantium eligendi eum tenetur, eius quis delectus quaerat odio voluptas eaque, beatae deserunt necessitatibus ut architecto incidunt provident amet quos nesciunt.</p>
+                    <p class="post-description">{{ post.description }}</p>
                 </div>
             </article>
-        </template>
+            {% endfor %}
 </section>
 
 {% comment %} {% if list %}

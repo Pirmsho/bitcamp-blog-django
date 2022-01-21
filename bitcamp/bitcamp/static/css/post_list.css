@@ -25,6 +25,15 @@
   justify-content: center;
   align-items: center;
 }
+.post-header a {
+  color: black;
+  font-size: 25px;
+  transition: 0.3s all;
+}
+.post-header a:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+}
 .post-author-div {
   display: flex;
   justify-content: center;
@@ -42,11 +51,28 @@
 p {
   margin: 0;
 }
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.category {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
 .post-main-image-div {
   width: 100%;
   height: 150px;
   border: 1px solid black;
   margin-bottom: 10px;
+}
+.post-main-image-div img,
+.author-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 @media (max-width: 1200px) {
   .posts-section {
