@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 
 class PostListView(ListView):
+    paginate_by = 3
     model = Post
 
 
