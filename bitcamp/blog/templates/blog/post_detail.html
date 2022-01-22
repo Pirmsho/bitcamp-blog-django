@@ -1,5 +1,58 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static '/css/post_detail.css' %}">
+{% endblock css_files %}
 
 {% block content %}
-post
+
+{% comment %} <h2>
+    Author detail Page!
+</h2>
+<div class="jumbotron">
+    <h4 class="card-title">{{ post.title }}</h4>
+        <div class="card" style="width:300px">
+          <img class="card-img-top" src="{{ post.image.url }}" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <p class="card-text">title: {{ post.title }}</p>
+            <p class="card-text">text: {{ post.text | safe }}</p>
+            <p class="card-text">create Date: {{ post.create_date }}</p>
+          </div>
+        </div>
+        <br>
+        
+        <div class="container">
+            <p>
+                <a class="btn btn-warning" href="{% url 'blog:post_update' pk=post.pk %}">Update</a>
+         
+                <a class="btn btn-danger" href="{% url 'blog:post_delete' pk=post.pk %}">Delete</a>
+            </p>
+        </div>
+        
+    </div> {% endcomment %}
+
+    <article class="single-post">
+        <div class="single-post-header">
+            <h1>{{ post.title | title }}</h1>
+            <div class="author-div">
+                <div class="author-img">
+                    {% comment %} აქ იქნება ავტორის ფოტო {% endcomment %}
+                </div>
+                <p>{{ post.author | title }}</p>
+                <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
+            </div>
+            <div class="categories">
+                {% for category in post.category.all %}
+                <p>{{ category }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="single-post-body">
+            <p>{{ post.text | safe }}</p>
+        </div>
+    </article>
+
 {% endblock %}

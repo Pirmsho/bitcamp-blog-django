@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+
+{% endblock css_files %}
 {% block content %}
-<h2 class="home-h">
-    HOME!
-</h2>
-<a href="{% url 'posts' %}">Posts</a>
+
+<section class="carousel-section">
+    
+</section>
+
+
 {% endblock %}

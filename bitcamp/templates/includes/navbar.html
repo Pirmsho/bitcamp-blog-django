@@ -4,28 +4,28 @@
             x-on:resize.window.debounce="isMobile = (window.innerWidth < 1000) ? true : false"
             x-data="{isMobile: (window.innerWidth < 1000) ? true : false}">
             <div class="first-nav-item" x-show="!isMobile" x-transition.duration.500ms>
-                <a href="{% url 'posts' %}"><li class="main-nav-item">პოსტები</li></a> 
+                <a href="{% url 'blog:posts' %}"><li class="main-nav-item">პოსტები</li></a> 
                 <a href="#"><li class="main-nav-item">კატეგორიები</li></a> 
                 
             </div>
             <div class="second-nav-item">
-                <a href="{% url 'home' %}"><li class="main-brand"> 🔥 BitCamp Blog</li></a>
+                <a href="{% url 'blog:home' %}"><li class="main-brand"> 🔥 BitCamp Blog</li></a>
                 <i class="bi bi-list" @click="isMobile = !isMobile"></i>
             </div>
             <div class="third-nav-item"
                  x-show="!isMobile" x-transition.duration.500ms>
-                {% comment %} 
+
+                 {% comment %} 
                 აქ იქნება if check, თუ მომხმარებელი არაა ავტორიზებული მაშინ ეს
                 {% endcomment %}
 
+                {% if user.is_authenticated  %}
+                <a href="#"><li class="main-nav-item">{{user }}-ის პროფილი</li></a>
+                <a href="{% url 'blog:logout' %}"><li class="main-nav-item">ლოგაუთი</li></a>
+                {% else %}
                 <a href="#"><li class="main-nav-item">ავტორიზაცია</li></a>
                 <a href="#"><li class="main-nav-item">რეგისტრაცია</li></a>
-
-                {% comment %} 
-                თუ მომხმარებელი ავტორიზებულია, მაშინ
-                <a href="#"><li class="main-nav-item">პროფილი</li></a>
-                <a href="#"><li class="main-nav-item">ლოგაუთი</li></a>
-                {% endcomment %}
+                {% endif %}
             </div>
         </ul>
     </nav>
