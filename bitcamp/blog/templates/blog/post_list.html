@@ -43,8 +43,12 @@
         {% for post in posts %}
             <article class="post" >
                 <div class="post-header">
-                    <h2><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h2> 
+                    <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2> 
                     <div class="categories">
+
+                        {% comment %} ლინკი, რომელიც კონკრეტულ კატეგორიაზე გავა
+                         და ყველა პოსტს გამოსახავს რომელიც კატეგორიას ეკუთვნის  {% endcomment %}
+
                         {% for category in post.category.all  %}
                         <p class="category">{{ category }}</p> 
                         {% endfor %}
@@ -58,7 +62,7 @@
                     </div>
                 </div>
                 <div class="post-main-image-div">
-                    <a href="{% url 'blog:post_detail' post.pk %}">
+                    <a href="{% url 'blog:post' post.pk %}">
                         <img src="{{ post.image.url }}" alt="პოსტის სურათი">
                     {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
                     </a>
