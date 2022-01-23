@@ -53,15 +53,16 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                          და ყველა პოსტს გამოსახავს რომელიც კატეგორიას ეკუთვნის  {% endcomment %}
 
                         {% for category in post.category.all  %}
-                        <p class="category">{{ category }}</p> 
+                        <a href="#"><p class="category">{{ category }}</p> </a>
                         {% endfor %}
                     </div>
                     <div class="post-author-div">
                         <div class="author-img">
+                            <img src="{{ post.author.image.url }}" style="width: 100%;" alt="პოსტის სურათი">
 
-                            {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
+                            {% comment %} აქ .author.first_name|title ბრუნდება ავტორის სურათი {% endcomment %}
                         </div> 
-                        <p class="author-name">{{ post.author|title }}</p>                     
+                        <p class="author-name">{{ post.author }}</p>                     
 
                     </div>
                 </div>
