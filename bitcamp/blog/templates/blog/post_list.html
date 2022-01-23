@@ -23,7 +23,7 @@
 paginate_by = 3 (რამდენი პოსტი გამოჩნდეს)    -->
 
 <section class="posts-section container">
-    <div class="post-list">
+    <!-- <div class="post-list"> -->
         {% for post in page_obj %}
             <article class="post" >
                 <div class="post-header">
@@ -41,7 +41,7 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                         <div class="author-img">
                             <img src="{{ post.author.image.url }}" style="width: 100%;" alt="პოსტის სურათი">
 
-                            {% comment %} აქ .author.first_name|title ბრუნდება ავტორის სურათი {% endcomment %}
+                            {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
                         </div> 
                         <p class="author-name">{{ post.author }}</p>                     
 
