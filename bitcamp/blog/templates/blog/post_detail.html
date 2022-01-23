@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static '/css/post_detail.css' %}">
+{% endblock css_files %}
 
 {% block content %}
 
-<h2>
+{% comment %} <h2>
     Author detail Page!
 </h2>
 <div class="jumbotron">
@@ -25,5 +31,28 @@
             </p>
         </div>
         
-    </div>
+    </div> {% endcomment %}
+
+    <article class="single-post">
+        <div class="single-post-header">
+            <h1>{{ post.title | title }}</h1>
+            <div class="author-div">
+                <div class="author-img">
+                    {% comment %} აქ იქნება ავტორის ფოტო {% endcomment %}
+                </div>
+                <p>{{ post.author | title }}</p>
+                <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
+            </div>
+            <div class="categories">
+                {% for category in post.category.all %}
+                <p>{{ category }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="single-post-body">
+            <p>{{ post.text | safe }}</p>
+        </div>
+    </article>
+
 {% endblock %}
