@@ -11,26 +11,7 @@
 
 {% block content %}
 
-<!-- ეს ქვევით კომენტარში რაცაა, მე აღარ მჭირდება. წავშალო? შენ ხომ არ გჭირდება? -->
-{% comment %} {{ posts }}
-<ul>
-    {% for post in posts %}
-    
-    <div style="width: 30%; float: left; padding: 40px;">
-        <li>Author: {{ post.author }}</li>
-        <li>First Name: {{ post.author.first_name }}</li>
-        <li>Last Name: {{ post.author.last_name }}</li>
-        <li><a href="{% url 'blog:post' post.pk %}">Title: {{ post.title }} - {{post.id}} - {{post.pk}} </a></li>
-        <li>Description: {{ post.description }}</li>
-        <li style="height: 100px; overflow: hidden;">Ttext: {{ post.text|safe }}</li>
-        <li>Category: {{ post.category.all }}</li>
-        <li>DATE: {{ post.create_date }}</li>
-        <a href="{% url 'blog:post' pk=post.pk %}">
-            <img src="{{ post.image.url }}" alt="Post image" style="height:320px;">
-        </a>
-    </div>
-    {% endfor %}
-</ul> {% endcomment %}
+
 
 <!-- აქ სიმბოლურად ვსვავ პოსტის დამატების ღილაკს, სადაც დაგჭირდება იქ გამოვიყენებთ -->
 
@@ -42,7 +23,7 @@
 paginate_by = 3 (რამდენი პოსტი გამოჩნდეს)    -->
 
 <section class="posts-section container">
-    <!-- აქ posts-ის მაგივრად page_obj -ს ვწერთ -->
+    <div class="post-list">
         {% for post in page_obj %}
             <article class="post" >
                 <div class="post-header">
@@ -77,22 +58,21 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 </div>
             </article>
             {% endfor %}
-
-<!-- გვერდების გადანომრვა -->
+    </div>
             <div class="pagination">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                        <a href="?page=1">&laquo; first</a>
-                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        <a href="?page=1">&laquo; პირველი გვერდი</a>
+                        <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number }}</a>
                     {% endif %}
             
                     <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                         {{ page_obj.number }} 
                     </span>
             
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}">next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        <a href="?page={{ page_obj.next_page_number }}" class="page-number">{{ page_obj.next_page_number }}</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">ბოლო გვერდი &raquo;</a>
                     {% endif %}
                 </span>
             </div>

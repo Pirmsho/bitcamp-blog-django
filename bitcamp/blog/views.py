@@ -3,7 +3,8 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404, get_list_or_404
 from . models import *
 from django.db import models
-from django.views.generic import (CreateView, UpdateView, DeleteView, DetailView, ListView)
+from django.views.generic import (
+    CreateView, UpdateView, DeleteView, DetailView, ListView)
 from django.urls import reverse_lazy, reverse
 from .models import Post
 from .forms import *
@@ -13,7 +14,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 
 class PostListView(ListView):
-    paginate_by = 3
+    paginate_by = 6
     model = Post
 
 
@@ -36,6 +37,7 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('blog:posts')
+
 
 def home(request):
     return render(request, 'home.html')
