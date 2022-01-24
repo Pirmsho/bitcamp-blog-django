@@ -5,7 +5,7 @@
             x-data="{isMobile: (window.innerWidth < 1000) ? true : false}">
             <div class="first-nav-item" x-show="!isMobile" x-transition.duration.500ms>
                 <a href="{% url 'blog:posts' %}"><li class="main-nav-item">პოსტები</li></a> 
-                <a href="#"><li class="main-nav-item">კატეგორიები</li></a> 
+                <a href="{% url 'blog:categories' %}"><li class="main-nav-item">კატეგორიები</li></a> 
                 <!-- დროებით რომ იყოს ხელს თუ არ გიშლის, მარტივად რომ გადავიდე უსრებზე -->
                 <a href="{% url 'user:authors' %}"><li class="main-nav-item">მენტორები</li></a> 
                 

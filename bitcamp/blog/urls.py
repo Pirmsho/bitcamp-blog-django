@@ -13,4 +13,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('comment/<int:pk>/', comment_detail, name='comment_detail'),
     path('comments/', comment_list, name='comment_list'),
+
+    path('categories/', CategoryListView.as_view(), name='categories'),
+    path('category/<int:pk>/', CategoryDetailView.as_view(), name='category'),
+
 ]

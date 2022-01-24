@@ -14,7 +14,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 
 class PostListView(ListView):
-    paginate_by = 6
+    paginate_by = 3
     model = Post
 
 
@@ -65,3 +65,17 @@ def comment_list(request):
     # return HttpResponse('This is comment list')
     context = {'posts': posts}
     return render(request, 'blog/comment_list.html', {'comments': comments})
+
+
+# -----------------------------------------------
+# აქედან იქნება view კატეგორიებისთვის
+
+
+
+class CategoryListView(ListView):
+    paginate_by = 3
+    model = Category
+
+
+class CategoryDetailView(DetailView):
+    model = Category

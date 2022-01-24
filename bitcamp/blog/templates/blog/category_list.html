@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/post_list.css' %}">
+{% endblock %}
+
+{% block js_files %}
+<script src="{% static 'js/post_list.js' %} " defer></script>
+{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_admin %}
+<a class="btn btn-info" href="#">Create New Category</a>
+{% endif %}
+
+<section class="posts-section container">
+    <div class="post-list">
+    {% for post in page_obj %}
+    <article class="post">
+        <div class="post-header">
+            <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2>
+            <div class="categories">
+
+                {% comment %} ლინკი, რომელიც კონკრეტულ კატეგორიაზე გავა
+                და ყველა პოსტს გამოსახავს რომელიც კატეგორიას ეკუთვნის {% endcomment %}
+
+                {% for category in post.category.all %}
+                <a href="#">
+                    <p class="category">{{ category }}</p>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="post-author-div">
+                <div class="author-img">
+                    <img src="{{ post.author.image.url }}" style="width: 100%;" alt="პოსტის სურათი">
+
+                    {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
+                </div>
+                <p class="author-name">{{ post.author }}</p>
+
+            </div>
+        </div>
+        <div class="post-main-image-div">
+            <a href="{% url 'blog:post' post.pk %}">
+                <img src="{{ post.image.url }}" alt="პოსტის სურათი">
+                {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
+            </a>
+        </div>
+        <div class="post-content">
+            <p class="post-description">{{ post.description }}</p>
+        </div>
+    </article>
+    {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; პირველი გვერდი</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number
+                }}</a>
+            {% endif %}
+
+            <span class="current">
+                {{ page_obj.number }}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-number">{{ page_obj.next_page_number }}</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">ბოლო გვერდი &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</section>
+
+
+
+{% endblock %}
