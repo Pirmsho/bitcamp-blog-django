@@ -1,0 +1,31 @@
+.single-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #e7e7e7;
+  width: 70%;
+  margin: 30px auto;
+}
+.single-post-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.author-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.author-div p {
+  margin-bottom: 0;
+}
+.author-img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+}

@@ -11,14 +11,13 @@
     <nav class="footer-navigation">
         <a href="{% url 'blog:posts' %}" class="footer-nav-item">პოსტები</a> 
         <a href="#" class="footer-nav-item">კატეგორიები</a>
-        {% comment %} 
-        აქ იქნება იგივე if check რაც navbar.html-ში.
-         {% endcomment %}
-        <a href="#" class="footer-nav-item">ავტორიზაცია</a>
-        <a href="#" class="footer-nav-item">რეგისტრაცია</a>
-        {% comment %} 
-        <a href="#" class="footer-nav-item">პროფილი</a>
-        <a href="#" class="footer-nav-item">ლოგაუთი</a>
-         {% endcomment %}
+
+         {% if user.is_authenticated  %}
+         <a href="#" class="footer-nav-item">პროფილი</a>
+         <a href="#" class="footer-nav-item">ლოგაუთი</a>
+         {% else %}
+         <a href="#" class="footer-nav-item">ავტორიზაცია</a>
+         <a href="#" class="footer-nav-item">რეგისტრაცია</a>
+         {% endif %}
     </nav>
 </footer>
