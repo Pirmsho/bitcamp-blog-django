@@ -7,27 +7,58 @@
 {% endblock css_files %}
 
 {% block content %}
-ddddddddd
-    <article class="single-post">
-        <div class="single-post-header">
-            <h1>{{ post.title | title }}</h1>
-            <div class="author-div">
-                <div class="author-img">
-                    {% comment %} აქ იქნება ავტორის ფოტო {% endcomment %}
-                </div>
-                <p>{{ post.author | title }}</p>
-                <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
+<article class="single-post">
+    <div class="single-post-header">
+        <h1>{{ category.category_name | title }}</h1>
+        <div class="author-div">
+            <div class="author-img">
+                <img src="{{ category.cat_image.url }}" style="height: 100%;" alt="პოსტის სურათი">
             </div>
-            <div class="categories">
-                {% for category in post.category.all %}
-                <p>{{ category }}</p>
-                {% endfor %}
-            </div>
+            <p>{{ category.describtion | title }}</p>
         </div>
-        
-        <div class="single-post-body">
-            <p>{{ post.text | safe }}</p>
-        </div>
-    </article>
+    </div>
+</article>
+
+
+<article class="single-post">
+    <h3>
+        Posts for this Category:
+    </h3>
+
+    <!-- <div class="categories"> -->
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            {% for post in category.post_set.all %}
+            <tbody>
+              <tr>
+                <td>{% for category in post.category.all  %}
+                    <a href="{% url 'blog:category' category.pk %}" style="color: brown;">{{ category }}</a>
+                    {% endfor %}</td>
+                <td>{{ post.title | title }}</td>
+                <td>{{ post.author | title }}</td>
+                <td>
+                    <img src="{{ post.image.url }}" style="width: 100px" alt="პოსტის სურათი">
+                </td>
+              </tr>
+
+            </tbody>
+            {% endfor %}
+          </table>
+
+
+    </div>
+
+    <div class="single-post-body">
+        <p>{{ post.text | safe }}</p>
+    </div>
+</article>
 
 {% endblock %}

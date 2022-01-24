@@ -12,58 +12,47 @@
 {% block content %}
 
 
-{% if user.is_admin %}
-<a class="btn btn-info" href="#">Create New Category</a>
+{% if user.is_superuser %}
+<p>
+    <a href="{% url 'user:register' %}">Create New Mentor By Admin!</a>
+</p>
 {% endif %}
+
+{% if category_list %}
 
 <section class="posts-section container">
     <div class="post-list">
-    {% for post in page_obj %}
-    <article class="post">
-        <div class="post-header">
-            <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2>
-            <div class="categories">
-
-                {% comment %} ლინკი, რომელიც კონკრეტულ კატეგორიაზე გავა
-                და ყველა პოსტს გამოსახავს რომელიც კატეგორიას ეკუთვნის {% endcomment %}
-
-                {% for category in post.category.all %}
+        {% for item in page_obj %}
+        <article class="post">
+            <div class="post-header">
+                <h2><a href="#">{{ item.category_name | title }}</a></h2>
+            </div>
+            <div class="post-main-image-div">
                 <a href="#">
-                    <p class="category">{{ category }}</p>
+                    <img src="{{ item.cat_image.url }}" alt="პოსტის სურათი">
                 </a>
-                {% endfor %}
             </div>
-            <div class="post-author-div">
-                <div class="author-img">
-                    <img src="{{ post.author.image.url }}" style="width: 100%;" alt="პოსტის სურათი">
-
-                    {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
-                </div>
-                <p class="author-name">{{ post.author }}</p>
-
+            <div class="post-content">
+                <p class="post-description">{{ item.describtion }}</p>
             </div>
-        </div>
-        <div class="post-main-image-div">
-            <a href="{% url 'blog:post' post.pk %}">
-                <img src="{{ post.image.url }}" alt="პოსტის სურათი">
-                {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
-            </a>
-        </div>
-        <div class="post-content">
-            <p class="post-description">{{ post.description }}</p>
-        </div>
     </article>
     {% endfor %}
-    </div>
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; პირველი გვერდი</a>
-            <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number
-                }}</a>
-            {% endif %}
+    
+    
+    {% else %}
+    <h3>   No List </h3>
+    {% endif %}
+</div>
 
-            <span class="current">
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; პირველი გვერდი</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+        
+        <span class="current">
                 {{ page_obj.number }}
             </span>
 

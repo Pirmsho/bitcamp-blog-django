@@ -32,9 +32,6 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                     <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2> 
                     <div class="categories">
 
-                        {% comment %} ლინკი, რომელიც კონკრეტულ კატეგორიაზე გავა
-                         და ყველა პოსტს გამოსახავს რომელიც კატეგორიას ეკუთვნის  {% endcomment %}
-
                         {% for category in post.category.all  %}
                         <a href="{% url 'blog:category' category.pk %}"><p class="category">{{ category }}</p> </a>
                         {% endfor %}
