@@ -25,11 +25,7 @@
 paginate_by = 3 (რამდენი პოსტი გამოჩნდეს)    -->
 
 <section class="posts-section container">
-<<<<<<< Updated upstream
     <div class="post-list">
-=======
-    <div class="post-list">
->>>>>>> Stashed changes
         {% for post in page_obj %}
             <article class="post" >
                 <div class="post-header">
@@ -41,12 +37,12 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                         {% endfor %}
                     </div>
                     <div class="post-author-div">
-                        <div class="author-img">
-                            <img src="{{ post.author.image.url }}" style="width: 100%;" alt="პოსტის სურათი">
+                        <a href="{% url 'user:author' post.author.pk %}"><div class="author-img">
+                            <img src="{{ post.author.image.url }}" style="width: 100%;" alt="ავტორის სურათი">
 
                             {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
-                        </div> 
-                        <p class="author-name">{{ post.author }}</p>                     
+                        </div></a>
+                        <a href="{% url 'user:author' post.author.pk %}"><p class="author-name">{{ post.author }}</p></a>                  
 
                     </div>
                 </div>

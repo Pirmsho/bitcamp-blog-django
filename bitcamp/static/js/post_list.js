@@ -28,5 +28,4 @@ ScrollTrigger.create({
   },
 })
 
-// make the right edge "stick" to the scroll bar. force3D: true improves performance
 gsap.set('.post', { transformOrigin: 'right center', force3D: true })
