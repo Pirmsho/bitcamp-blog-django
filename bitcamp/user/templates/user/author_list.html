@@ -1,30 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="bg-secondary text-red p-5 m-5">
 
-{% if user.is_superuser %}
-<p>
+    {% if user.is_superuser %}
+    <p>
     <a href="{% url 'user:register' %}">Create New Mentor By Admin!</a>
 </p>
 {% endif %}
 
 {% if author_list %}
 
-<ul>
-
+<ol>
+    
     {% for item in author_list %}
     <li>
-        <ol>
+        <ul>
             <li><a href="{% url 'user:author' pk=item.pk %}">{{ item.username }}</a></li>
             <li>{{ item.get_full_name }}</li>
-        </ol>
+        </ul>
     </li>
+    <hr>
     {% endfor %}
-</ul>
+</ol>
 {% else %}
 <h3>
     No List
 </h3>
 {% endif %}
 
+</div>
 {% endblock %}

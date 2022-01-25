@@ -7,7 +7,7 @@
 {% endblock css_files %}
 
 {% block js_files %}
-<script src="{% static 'js/post_detail.js' %}" defer ></script> 
+<script src="{% static 'js/post_detail.js' %}" defer></script>
 {% endblock js_files %}
 
 {% block content %}
@@ -27,10 +27,63 @@
                 {% endfor %}
             </div>
         </div>
-        
-        <div class="single-post-body">
-            <p>{{ post.text | safe }}</p>
+        <div class="categories">
+            {% for category in post.category.all %}
+            <a href="{% url 'blog:category' category.pk %}" class="single-category">
+                <p>{{ category }}</p>
+            </a>
+            {% endfor %}
         </div>
-    </article>
+    </div>
+    <div class="single-post-body">
+        <p>{{ post.text | safe }}</p>
+    </div>
+</article>
+<article class="single-post">
+    <div class="single-post-header">
+        <h3>
+            Comments:
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">author</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in post.comments.all %}
+                <tr>
+                    <th scope="row">{{item.pk}}</th>
+                    <td>{{item.author}}</td>
+                    <td>{{item.text}}</td>
+                    <td>{{item.created_date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="width: 100%;">
+        <form method="POST">
+            {{ com_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Submittt">
+            </form>
+        </form>
+        <hr>
+        <p>
+        <!-- <form action="{% url 'blog:createcomment' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <input type="submit" value="Comment">
+        </form> -->
+        </p>
+    </div>
+</article>
+
 
 {% endblock %}

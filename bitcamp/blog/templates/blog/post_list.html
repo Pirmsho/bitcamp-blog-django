@@ -45,7 +45,6 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 <div class="post-main-image-div">
                     <a href="{% url 'blog:post' post.pk %}">
                         <img src="{{ post.image.url }}" alt="პოსტის სურათი">
-                    {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
                     </a>
                 </div>
                 <div class="post-content">
@@ -53,6 +52,9 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 </div>
             </article>
             {% endfor %}
+
+
+
     </div>
             <div class="pagination">
                 <span class="step-links">
