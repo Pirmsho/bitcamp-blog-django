@@ -39,8 +39,6 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                     <div class="post-author-div">
                         <a href="{% url 'user:author' post.author.pk %}"><div class="author-img">
                             <img src="{{ post.author.image.url }}" style="width: 100%;" alt="ავტორის სურათი">
-
-                            {% comment %} აქ ბრუნდება ავტორის სურათი {% endcomment %}
                         </div></a>
                         <a href="{% url 'user:author' post.author.pk %}"><p class="author-name">{{ post.author }}</p></a>                  
 
@@ -49,7 +47,6 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 <div class="post-main-image-div">
                     <a href="{% url 'blog:post' post.pk %}">
                         <img src="{{ post.image.url }}" alt="პოსტის სურათი">
-                    {% comment %} აქ ბრუნდება პოსტის მთავარი სურათი {% endcomment %}
                     </a>
                 </div>
                 <div class="post-content">
@@ -57,6 +54,9 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 </div>
             </article>
             {% endfor %}
+
+
+
     </div>
             <div class="pagination">
                 <span class="step-links">

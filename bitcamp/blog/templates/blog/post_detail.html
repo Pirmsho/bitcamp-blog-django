@@ -7,32 +7,83 @@
 {% endblock css_files %}
 
 {% block js_files %}
-<script src="{% static 'js/post_detail.js' %}" defer ></script> 
+<script src="{% static 'js/post_detail.js' %}" defer></script>
 {% endblock js_files %}
 
 {% block content %}
 
-    <article class="single-post">
-        <div class="single-post-header">
-            <h1>{{ post.title | title }}</h1>
-            <div class="author-div">
-                <a href="{% url 'user:author' post.author.pk %}"><div class="author-img">
-                    {% comment %} აქ იქნება ავტორის ფოტო {% endcomment %}
-                </div></a>
-                <a href="{% url 'user:author' post.author.pk %}"><p>{{ post.author | title }}</p></a>
-                
-                <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
-            </div>
-            <div class="categories">
-                {% for category in post.category.all %}
-                <a href="{% url 'blog:category' category.pk %}" class="single-category"><p>{{ category }}</p></a>
+<article class="single-post">
+    <div class="single-post-header">
+        <h1>{{ post.title | title }}</h1>
+        <div class="author-div">
+            <a href="{% url 'user:author' post.author.pk %}">
+                <div class="author-img">
+                    <img src="{{ post.author.image.url }}" style="width: 100%;" alt="ავტორის სურათი">
+                </div>
+            </a>
+            <a href="{% url 'user:author' post.author.pk %}">
+                <p>{{ post.author | title }}</p>
+            </a>
+
+            <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
+        </div>
+        <div class="categories">
+            {% for category in post.category.all %}
+            <a href="{% url 'blog:category' category.pk %}" class="single-category">
+                <p>{{ category }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="single-post-body">
+        <p>{{ post.text | safe }}</p>
+    </div>
+</article>
+<article class="single-post">
+    <div class="single-post-header">
+        <h3>
+            Comments:
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">author</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in post.comments.all %}
+                <tr>
+                    <th scope="row">{{item.pk}}</th>
+                    <td>{{item.author}}</td>
+                    <td>{{item.text}}</td>
+                    <td>{{item.created_date}}</td>
+                </tr>
                 {% endfor %}
-            </div>
-        </div>
-        
-        <div class="single-post-body">
-            <p>{{ post.text | safe }}</p>
-        </div>
-    </article>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div style="width: 100%;">
+        <form method="POST">
+            {{ com_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Submittt">
+            </form>
+        </form>
+        <hr>
+        <p>
+        <!-- <form action="{% url 'blog:createcomment' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <input type="submit" value="Comment">
+        </form> -->
+        </p>
+    </div>
+</article>
+
 
 {% endblock %}

@@ -37,7 +37,7 @@ class AuthorDeleteView(DeleteView):
     success_url = reverse_lazy('user:authors')
 
 
-# @@@@@@@@@@@@@@@@@ დეკორატორი ჭირდება რომ მხოლოდ ადმინმაშეძლოს მენტორის დარეგისტრირება
+# @@@@@@@@@@@@@@@@@ დეკორატორი ჭირდება რომ მხოლოდ ადმინმა შეძლოს მენტორის დარეგისტრირება
 def register(request):
     registered = False
     if request.method == 'POST':

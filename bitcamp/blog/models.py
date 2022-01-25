@@ -47,12 +47,12 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, related_name='comments', on_delete=models.CASCADE)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True, default="anonymous")
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse("post_list")
+        return reverse("blog:post", pk=self.post.pk)
 
     def __str__(self):
         return self.text
