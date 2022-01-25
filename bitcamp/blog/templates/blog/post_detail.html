@@ -16,9 +16,7 @@
         <div class="single-post-header">
             <h1>{{ post.title | title }}</h1>
             <div class="author-div">
-                <a href="{% url 'user:author' post.author.pk %}"><div class="author-img">
-                    {% comment %} აქ იქნება ავტორის ფოტო {% endcomment %}
-                </div></a>
+                <i class="bi bi-person-circle"></i>
                 <a href="{% url 'user:author' post.author.pk %}"><p>{{ post.author | title }}</p></a>
                 
                 <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>

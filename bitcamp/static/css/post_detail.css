@@ -43,11 +43,11 @@
   padding-right: 10px;
   border-right: 1px solid black;
 }
-.author-img {
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  border: 1px solid black;
+.bi-person-circle {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .categories {
   display: flex;
