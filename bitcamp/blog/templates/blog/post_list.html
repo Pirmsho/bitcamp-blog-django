@@ -37,9 +37,7 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                         {% endfor %}
                     </div>
                     <div class="post-author-div">
-                        <a href="{% url 'user:author' post.author.pk %}"><div class="author-img">
-                            <img src="{{ post.author.image.url }}" style="width: 100%;" alt="ავტორის სურათი">
-                        </div></a>
+                        <i class="bi bi-person-circle"></i>
                         <a href="{% url 'user:author' post.author.pk %}"><p class="author-name">{{ post.author }}</p></a>                  
 
                     </div>
