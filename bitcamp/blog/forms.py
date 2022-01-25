@@ -1,3 +1,4 @@
+from cProfile import label
 from dataclasses import field
 from pyexpat import model
 from statistics import mode
@@ -12,6 +13,11 @@ class CommentForm(forms.Form):
 
 
 class CommetModelForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.Textarea(attrs={
+        'rows': 4, 'class': 'form-control', 'placeholder': 'Comments here ...',
+        # 'label': 'Cooments',
+    }))
+
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('text',)

@@ -66,22 +66,17 @@
         </table>
 
     </div>
-
+<br>
+<br>
+{% if user.is_authenticated %}
     <div style="width: 100%;">
         <form method="POST">
             {{ com_form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="Submittt">
-            </form>
+            <input type="hidden" name="id" value="{{ user.pk }}">
+            <input type="submit" value="Submit">
         </form>
-        <hr>
-        <p>
-        <!-- <form action="{% url 'blog:createcomment' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <input type="submit" value="Comment">
-        </form> -->
-        </p>
+        {% endif %}
     </div>
 </article>
 
