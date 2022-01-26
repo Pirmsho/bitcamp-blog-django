@@ -14,6 +14,9 @@ body {
   padding-bottom: 200px;
 }
 
+a {
+  text-decoration: none;
+}
 /* navbar styles to line 152 */
 
 header {
@@ -60,7 +63,9 @@ header nav {
   display: none;
   cursor: pointer;
 }
-a {
+.first-nav-item a,
+.second-nav-item a,
+.third-nav-item a {
   text-decoration: none;
   color: #f1f1f1;
   font-weight: 700;
@@ -153,6 +158,13 @@ a {
   justify-content: center;
   gap: 30px;
   align-items: center;
+}
+.footer-navigation a {
+  text-decoration: none;
+  color: #f1f1f1;
+  font-weight: 700;
+
+  font-size: 18px;
 }
 .footer-nav-item {
   padding: 5px 10px;

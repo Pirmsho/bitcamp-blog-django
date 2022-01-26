@@ -45,3 +45,12 @@
 .submit-button:hover {
   transform: scale(1.05);
 }
+.authorisation-link {
+  color: #262a43;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 20px;
+}
+.authorisation-link:hover {
+  transform: scale(1.05);
+}
