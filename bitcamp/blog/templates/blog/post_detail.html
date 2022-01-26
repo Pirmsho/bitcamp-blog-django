@@ -12,20 +12,16 @@
 
 {% block content %}
 
-    <article class="single-post">
-        <div class="single-post-header">
-            <h1>{{ post.title | title }}</h1>
-            <div class="author-div">
-                <i class="bi bi-person-circle"></i>
-                <a href="{% url 'user:author' post.author.pk %}"><p>{{ post.author | title }}</p></a>
-                
-                <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
-            </div>
-            <div class="categories">
-                {% for category in post.category.all %}
-                <a href="{% url 'blog:category' category.pk %}" class="single-category"><p>{{ category }}</p></a>
-                {% endfor %}
-            </div>
+<article class="single-post">
+    <div class="single-post-header">
+        <h1>{{ post.title | title }}</h1>
+        <div class="author-div">
+            <i class="bi bi-person-circle"></i>
+            <a href="{% url 'user:author' post.author.pk %}">
+                <p>{{ post.author | title }}</p>
+            </a>
+
+            <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
         </div>
         <div class="categories">
             {% for category in post.category.all %}
@@ -34,6 +30,13 @@
             </a>
             {% endfor %}
         </div>
+    </div>
+    <div class="categories">
+        {% for category in post.category.all %}
+        <a href="{% url 'blog:category' category.pk %}" class="single-category">
+            <p>{{ category }}</p>
+        </a>
+        {% endfor %}
     </div>
     <div class="single-post-body">
         <p>{{ post.text | safe }}</p>
@@ -66,9 +69,9 @@
         </table>
 
     </div>
-<br>
-<br>
-{% if user.is_authenticated %}
+    <br>
+    <br>
+    {% if user.is_authenticated %}
     <div style="width: 100%;">
         <form method="POST">
             {{ com_form.as_p }}
@@ -79,6 +82,10 @@
         {% endif %}
     </div>
 </article>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 
 {% endblock %}

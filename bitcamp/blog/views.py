@@ -34,15 +34,15 @@ class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('blog:posts')
 
-
 def home(request):
+    posts = Post.objects.all()[:4:2]
+    print(type(posts))
+    print(type(posts[0]))
     return render(request, 'home.html')
-
 
 def post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     form = CommetModelForm()
-    print(type(request.user))
 
     if request.method == 'POST':
         form = CommetModelForm(request.POST)
