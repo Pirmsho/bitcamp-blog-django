@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{% static 'js/post_list.js' %} " defer></script> 
+<script src="{% static 'js/post_list.js' %} " defer></script>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,14 @@
 <a class="btn btn-info" href="{% url 'blog:create_post' %}">Create New Post</a>
 {% endif %}
 
-
+<!--------------------------------------ძებნის ღილაკი, თუ გვჭირება, თუ არადა წავშალოთ------------------------------------------------------------>
+<div class="row">
+    <form method="get" action="{% url 'blog:posts' %}">
+        <input id="search_post" type="text" name="phrase" value="{{ request.GET.phrase }}">
+        <label for="search_post">Enter phrase</label>
+        <button class="btn btn-info" type="submit" name="action">Find Post</button>
+    </form>
+</div>
 
 <!-- აქედან იწყება პოსტების გამოტანა იმდენის რამდენიც მითითებულია view-ში class PostListView(ListView):
 paginate_by = 3 (რამდენი პოსტი გამოჩნდეს)    -->
@@ -27,54 +34,54 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
 <section class="posts-section container">
     <div class="post-list">
         {% for post in page_obj %}
-            <article class="post" >
-                <div class="post-header">
-                    <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2> 
-                    <div class="categories">
+        <article class="post">
+            <div class="post-header">
+                <h2><a href="{% url 'blog:post' post.pk %}">{{ post.title | title }}</a></h2>
+                <div class="categories">
 
-                        {% for category in post.category.all  %}
-                        <a href="{% url 'blog:category' category.pk %}"><p class="category">{{ category }}</p> </a>
-                        {% endfor %}
-                    </div>
-                    <div class="post-author-div">
-                        <i class="bi bi-person-circle"></i>
-                        <a href="{% url 'user:author' post.author.pk %}"><p class="author-name">{{ post.author }}</p></a>                  
-
-                    </div>
-                </div>
-                <div class="post-main-image-div">
-                    <a href="{% url 'blog:post' post.pk %}">
-                        <img src="{{ post.image.url }}" alt="პოსტის სურათი">
+                    {% for category in post.category.all %}
+                    <a href="{% url 'blog:category' category.pk %}">
+                        <p class="category">{{ category }}</p>
                     </a>
+                    {% endfor %}
                 </div>
-                <div class="post-content">
-                    <p class="post-description">{{ post.description }}</p>
+                <div class="post-author-div">
+                    <i class="bi bi-person-circle"></i>
+                    <a href="{% url 'user:author' post.author.pk %}">
+                        <p class="author-name">{{ post.author }}</p>
+                    </a>
+
                 </div>
-            </article>
-            {% endfor %}
-
-
+            </div>
+            <div class="post-main-image-div">
+                <a href="{% url 'blog:post' post.pk %}">
+                    <img src="{{ post.image.url }}" alt="პოსტის სურათი">
+                </a>
+            </div>
+            <div class="post-content">
+                <p class="post-description">{{ post.description }}</p>
+            </div>
+        </article>
+        {% endfor %}
 
     </div>
-            <div class="pagination">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1">&laquo; პირველი გვერდი</a>
-                        <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number }}</a>
-                    {% endif %}
-            
-                    <span class="current">
-                         {{ page_obj.number }} 
-                    </span>
-            
-                    {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="page-number">{{ page_obj.next_page_number }}</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">ბოლო გვერდი &raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
-        </section>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; პირველი გვერდი</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
 
+            <span class="current">
+                {{ page_obj.number }}
+            </span>
 
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-number">{{ page_obj.next_page_number }}</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">ბოლო გვერდი &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</section>
 
 {% endblock %}

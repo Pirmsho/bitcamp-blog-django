@@ -12,11 +12,26 @@ from django.contrib.auth import (authenticate, login, logout)
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator
-
+from django.db.models import Q
 
 class PostListView(ListView):
     paginate_by = 3
     model = Post
+
+def posts(request):
+    phrase_q = Q()
+    q = request.GET.get('phrase')
+    if q:
+        phrase_q &= (Q(text__icontains=q) | Q(description__icontains=q) | Q(title__icontains=q))
+    post_list = Post.objects.filter(phrase_q).order_by('-pk')
+    paginator = Paginator(post_list, 3)  # Show 3 posts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, 'blog/post_list.html', context)
+
 
 
 class PostCreateView(CreateView):
