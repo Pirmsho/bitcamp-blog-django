@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.shortcuts import render
 from django.views.generic import (CreateView, UpdateView, DeleteView, DetailView, ListView)
@@ -68,6 +69,7 @@ def register(request):
             user.save()
             # Registration Successful!
             registered = True
+            return HttpResponseRedirect(reverse('user:login'))
         else:
             # One of the forms was invalid if this else gets called.
             print(user_form.errors)

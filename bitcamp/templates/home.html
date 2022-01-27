@@ -16,7 +16,16 @@
         Green text for Home.thml h3 tag.
     </h3>
 </div>
+<ul>
+{% for item in posts %}
+    <li>
+{{ item.name }}
+{{ item }}
+</li>
+{% endfor %}
+</ul>
 <section class="carousel-section">
+
     
 </section>
 
