@@ -4,30 +4,68 @@
 
 {% block css_files %} 
 
-<link rel="stylesheet" href="{% static 'blog/css/post_list.css' %}"> 
+<!-- <link rel="stylesheet" href="{% static 'blog/css/post_list.css' %}">  -->
+<link rel="stylesheet" href="{% static 'css/home.css' %}"> 
 
 {% endblock %}
 
 
 {% block content %}
-<div>
 
-    <h3>
-        Green text for Home.thml h3 tag.
-    </h3>
+
+<h2>Automatic Slideshow</h2>
+<p>Change image every 2 seconds:</p>
+
+<div class="slideshow-container">
+{% for post in posts %}
+<div class="mySlides fade">
+  <div class="numbertext">{{  post.pk }} / 10</div>
+  <img src="{{ post.image.url }}" style="width:100%">
+  <div class="text">{{ post.title | title }}</div>
 </div>
-<ul>
-{% for item in posts %}
-    <li>
-{{ item.name }}
-{{ item }}
-</li>
+
 {% endfor %}
-</ul>
-<section class="carousel-section">
 
-    
-</section>
 
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
 
 {% endblock %}

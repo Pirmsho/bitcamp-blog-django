@@ -50,8 +50,8 @@ class PostDeleteView(DeleteView):
     success_url = reverse_lazy('blog:posts')
 
 def home(request):
-    one_post_from_category = PostModel.objects.all()[0:3]
-    return render(request, 'home.html', {'posts':one_post_from_category})
+    posts = Post.objects.all()[0:10]
+    return render(request, 'home.html', {'posts':posts})
 
 def post(request, pk):
     post = get_object_or_404(Post, pk=pk)

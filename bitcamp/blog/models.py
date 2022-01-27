@@ -44,14 +44,6 @@ class Post(models.Model):
         ordering = ['-create_date']
 
 
-class PostModel(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.PROTECT)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    
-    class Meta:
-        unique_together = [['post', 'category']]
-
-
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, related_name='comments', on_delete=models.CASCADE)
