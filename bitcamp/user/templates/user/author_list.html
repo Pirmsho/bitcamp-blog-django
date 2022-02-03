@@ -3,31 +3,36 @@
 {% block content %}
 <div class="bg-secondary text-red p-5 m-5">
 
-    {% if user.is_superuser %}
-    <p>
-    <a href="{% url 'user:register' %}">Create New Mentor By Admin!</a>
-</p>
-{% endif %}
-
-{% if author_list %}
-
-<ol>
-    
-    {% for item in author_list %}
-    <li>
-        <ul>
-            <li><a href="{% url 'user:author' pk=item.pk %}">{{ item.username }}</a></li>
-            <li>{{ item.get_full_name }}</li>
-        </ul>
-    </li>
-    <hr>
-    {% endfor %}
-</ol>
-{% else %}
-<h3>
-    No List
-</h3>
-{% endif %}
+    {% if author_list %}
+    <h2>
+        საიტის მენტორები:
+    </h2>
+    <br>
+    <ol>
+        {% for item in author_list %}
+        <li>
+            <ul>
+                <li>
+                    <form method="GET" action="{% url 'blog:posts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="qa" value="{{ item.pk }}">
+                        <input type="submit" value="{{ item }}-ს პოსტები">
+                    </form>
+                </li>
+                <li>
+                    <a href="{% url 'user:author' pk=item.pk %}">{{ item.username }}</a>
+                </li>
+                <li>{{ item.get_full_name }}</li>
+            </ul>
+        </li>
+        <hr>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <h3>
+        No List
+    </h3>
+    {% endif %}
 
 </div>
 {% endblock %}

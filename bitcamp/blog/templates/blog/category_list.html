@@ -12,12 +12,6 @@
 {% block content %}
 
 
-{% if user.is_superuser %}
-<p>
-    <a href="{% url 'user:register' %}">Create New Mentor By Admin!</a>
-</p>
-{% endif %}
-
 {% if category_list %}
 
 <section class="posts-section container">

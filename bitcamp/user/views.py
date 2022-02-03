@@ -1,4 +1,3 @@
-import re
 from django.db import models
 from django.shortcuts import render
 from django.views.generic import (CreateView, UpdateView, DeleteView, DetailView, ListView)
@@ -15,6 +14,7 @@ def home(request):
 
 
 class AutorListView(ListView):
+    queryset = Author.objects.filter(is_staff=True)
     model = Author
 
 
@@ -42,7 +42,6 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = AuthorForm(data=request.POST)
-        print(user_form)
         if user_form.is_valid():
             user = user_form.save()
             # user.set_password(user.password1)
@@ -62,34 +61,23 @@ def register(request):
                            'registered':registered})
 
 
-
 def my_login(request):
     if request.method == 'POST':
-        print(request.user)
-        print(request.POST)
         username = request.POST['username']
-        print(username)
         password = request.POST['password']
-        print(password)
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user:
-            #Check it the account is active
             if user.is_active:
-                # Log the user in.
                 login(request,user)
-                # Send the user back to some page.
-                # In this case their homepage.
                 return HttpResponseRedirect(reverse('blog:home'))
             else:
-                # If account is not active:
+                # ალბათ ესეც გასასწორებელია.........................................
                 return HttpResponse("Your account is not active.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
+            # აქ გასასწორებელია. იგივე გვერდზე უნდა დარჩეს და მესიჯი გამოიტანოს............
+            # return HttpResponseRedirect(reverse('blog:home'))
             return HttpResponse("Invalid login details supplied.")
     else:
-        #Nothing has been provided for username or password.
         return render(request, 'user/login.html', {})
 
 

@@ -20,7 +20,6 @@
             <a href="{% url 'user:author' post.author.pk %}">
                 <p>{{ post.author | title }}</p>
             </a>
-
             <span>{{ post.create_date | date:"SHORT_DATE_FORMAT" }}</span>
         </div>
         <div class="categories">
@@ -74,8 +73,8 @@
     {% if user.is_authenticated %}
     <div style="width: 100%;">
         <form method="POST">
-            {{ com_form.as_p }}
             {% csrf_token %}
+            {{ com_form.as_p }}
             <input type="hidden" name="id" value="{{ user.pk }}">
             <input type="submit" value="Submit">
         </form>

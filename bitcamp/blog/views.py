@@ -14,9 +14,23 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+
 class PostListView(ListView):
-    paginate_by = 3
     model = Post
+    paginate_by = 3
+
+    def get_queryset(self):
+        phrase_q = Q()
+        q = self.request.GET.get('phrase')
+        qa = self.request.GET.get('qa')
+        if q:
+            phrase_q &= (Q(text__icontains=q) | Q(description__icontains=q) | Q(title__icontains=q))
+        if qa:
+            phrase_q &= (Q(author__pk=qa))
+        return Post.objects.filter(phrase_q).order_by('-pk')
+
+
+
 
 def posts(request):
     phrase_q = Q()

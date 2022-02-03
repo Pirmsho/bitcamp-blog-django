@@ -11,28 +11,29 @@
 
 {% block content %}
 
-
-
 <!-- აქ სიმბოლურად ვსვავ პოსტის დამატების ღილაკს, სადაც დაგჭირდება იქ გამოვიყენებთ.
     ეს ღილაკი გამოუჩნდებათ მარტო მენტორებს, ანუ ვინც იქნება is_staff სტატუსით -->
-{% if user.is_staff %}
-<a class="btn btn-info" href="{% url 'blog:create_post' %}">Create New Post</a>
-{% endif %}
+<center style="margin: auto;">
+    {% if user.is_staff %}
+    <a class="btn btn-info" href="{% url 'blog:create_post' %}">Create New Post</a>
+    {% endif %}
 
-<!--------------------------------------ძებნის ღილაკი, თუ გვჭირება, თუ არადა წავშალოთ------------------------------------------------------------>
-<div class="row">
-    <form method="get" action="{% url 'blog:posts' %}">
-        <input id="search_post" type="text" name="phrase" value="{{ request.GET.phrase }}">
-        <label for="search_post">Enter phrase</label>
-        <button class="btn btn-info" type="submit" name="action">Find Post</button>
-    </form>
-</div>
+    <!--------------------------------------ძებნის ღილაკი, თუ გვჭირება, თუ არადა წავშალოთ------------------------------------------------------------>
+    <div class="row">
+        <form method="get" action="{% url 'blog:posts' %}">
+            <input id="search_post" type="text" name="phrase" value="{{ request.GET.phrase }}">
+            <label for="search_post">Enter phrase</label>
+            <button class="btn btn-info" type="submit" name="action">Find Post</button>
+        </form>
+    </div>
+</center>
 
 <!-- აქედან იწყება პოსტების გამოტანა იმდენის რამდენიც მითითებულია view-ში class PostListView(ListView):
 paginate_by = 3 (რამდენი პოსტი გამოჩნდეს)    -->
-
+{% if page_obj %}
 <section class="posts-section container">
     <div class="post-list">
+
         {% for post in page_obj %}
         <article class="post">
             <div class="post-header">
@@ -44,13 +45,13 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                         <p class="category">{{ category }}</p>
                     </a>
                     {% endfor %}
+
                 </div>
                 <div class="post-author-div">
                     <i class="bi bi-person-circle"></i>
                     <a href="{% url 'user:author' post.author.pk %}">
                         <p class="author-name">{{ post.author }}</p>
                     </a>
-
                 </div>
             </div>
             <div class="post-main-image-div">
@@ -65,11 +66,15 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
         {% endfor %}
 
     </div>
+
+
     <div class="pagination">
         <span class="step-links">
+
             {% if page_obj.has_previous %}
             <a href="?page=1">&laquo; პირველი გვერდი</a>
-            <a href="?page={{ page_obj.previous_page_number }}" class="page-number">{{ page_obj.previous_page_number }}</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-number">
+                {{ page_obj.previous_page_number }}</a>
             {% endif %}
 
             <span class="current">
@@ -80,8 +85,15 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
             <a href="?page={{ page_obj.next_page_number }}" class="page-number">{{ page_obj.next_page_number }}</a>
             <a href="?page={{ page_obj.paginator.num_pages }}">ბოლო გვერდი &raquo;</a>
             {% endif %}
+
         </span>
     </div>
 </section>
+
+{% else %}
+
+No Post for this creteria!
+
+{% endif %}
 
 {% endblock %}

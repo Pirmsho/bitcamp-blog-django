@@ -2,37 +2,16 @@
 {% load static %}
 
 {% block css_files %}
-  <link rel="stylesheet" href="{% static 'css/login.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock css_files %}
-
 
 {% block content %}
 
-
-  {% comment %} <div class="container">
-    <div class="jumbotron">
-      <h1>Please Login</h1>
-
-        <form method="post" action="{% url 'user:login' %}">
-          {% csrf_token %}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-
-          <label for="password"></label>
-          <input type="password" name="password">
-
-          <input type="submit" name="" value="Login">
-
-        </form>
-
-    </div>
-  </div> {% endcomment %}
-
-  <section class="d-flex flex-column justify-content-center align-items-center gap-4 container card p-4 mt-4">
-    <h1>ავტორიზაცია</h1>
-    <form method="post" action="{% url 'user:login' %}" class="login-form p-2">
-      {% csrf_token %}
-      <div class="d-flex justify-content-end align-items-center gap-2">
+<section class="d-flex flex-column justify-content-center align-items-center gap-4 container card p-4 mt-4">
+  <h1>ავტორიზაცია</h1>
+  <form method="post" action="{% url 'user:login' %}" class="login-form p-2">
+    {% csrf_token %}
+    <div class="d-flex justify-content-end align-items-center gap-2">
       <label for="username">Username:</label>
       <input type="text" name="username" placeholder="Username">
     </div>
@@ -40,13 +19,11 @@
       <label for="password">Password:</label>
       <input type="password" name="password">
     </div>
-      <button  class="submit-button" name="" >ავტორიზაცია</button>
+    <button class="submit-button" name="">ავტორიზაცია</button>
 
-    </form>
-    <a href="{% url 'user:register' %}" class="authorisation-link text-decoration-none">არ გაქვთ აქაუნთი? დარეგისტრირდით</a> 
-  </section>
-
-
-
+  </form>
+  <a href="{% url 'user:register' %}" class="authorisation-link text-decoration-none">არ გაქვთ აქაუნთი?
+    დარეგისტრირდით</a>
+</section>
 
 {% endblock %}
