@@ -10,20 +10,22 @@
 {% endblock %}
 
 {% block content %}
-
 <!-- აქ სიმბოლურად ვსვავ პოსტის დამატების ღილაკს, სადაც დაგჭირდება იქ გამოვიყენებთ.
     ეს ღილაკი გამოუჩნდებათ მარტო მენტორებს, ანუ ვინც იქნება is_staff სტატუსით -->
 <center style="margin: auto;">
     {% if user.is_staff %}
-    <a class="btn btn-info" href="{% url 'blog:create_post' %}">Create New Post</a>
+    <br>
+    <a class="create-button" href="{% url 'blog:create_post' %}">Create New Post</a>
+    <br>
     {% endif %}
+    <br>
 
     <!--------------------------------------ძებნის ღილაკი, თუ გვჭირება, თუ არადა წავშალოთ------------------------------------------------------------>
     <div class="row">
         <form method="get" action="{% url 'blog:posts' %}">
             <input id="search_post" type="text" name="phrase" value="{{ request.GET.phrase }}">
             <label for="search_post">Enter phrase</label>
-            <button class="btn btn-info" type="submit" name="action">Find Post</button>
+            <button class="create-button" type="submit" name="action">Find Post</button>
         </form>
     </div>
 </center>
@@ -49,9 +51,13 @@ paginate_by = 3 (რამდენი პოსტი გამოჩნდე�
                 </div>
                 <div class="post-author-div">
                     <i class="bi bi-person-circle"></i>
-                    <a href="{% url 'user:author' post.author.pk %}">
-                        <p class="author-name">{{ post.author }}</p>
-                    </a>
+                    <form method="GET" action="{% url 'blog:posts' %}">
+                        {% csrf_token %}
+                        <button type="hidden" name="qa" value="{{ post.author.pk }}">
+                            <p class="author-name">{{ post.author }}</p>
+                        </button>
+                        <!-- <input type="submit" value="{{ item }}-ს პოსტები"> -->
+                    </form>
                 </div>
             </div>
             <div class="post-main-image-div">

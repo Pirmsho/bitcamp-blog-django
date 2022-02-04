@@ -47,12 +47,13 @@ def posts(request):
     return render(request, 'blog/post_list.html', context)
 
 
-
+# ავტომატურად უნდა იყოს ავტორიზებული უსერ პოსტის ავტორი
 class PostCreateView(CreateView):
     fields = '__all__'
     model = Post
 
 
+# აქ გვინდა რომ მხოლოდ პოსტის ავტორს შეეძლოს მოხვედრა
 class PostUpdateView(UpdateView):
     fields = '__all__'
     model = Post
@@ -62,6 +63,13 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('blog:posts')
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    # აქ მირჩევნია იგივე გვერდზე დავრჩე
+    success_url = reverse_lazy('blog:posts')
+    
 
 def home(request):
     posts = Post.objects.all()[0:10]

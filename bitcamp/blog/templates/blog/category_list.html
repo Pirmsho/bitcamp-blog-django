@@ -19,7 +19,7 @@
         {% for item in page_obj %}
         <article class="post">
             <div class="post-header">
-                <h2><a href="#">{{ item.category_name | title }}</a></h2>
+                <h2><a href="{% url 'blog:category' item.pk %}">{{ item.category_name | title }} {{ item.pk }}</a></h2>
             </div>
             <div class="post-main-image-div">
                 <a href="#">

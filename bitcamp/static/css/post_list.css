@@ -1,3 +1,12 @@
+.create-button {
+  background-color: #1d2242;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  transition: all 0.3s;
+}
 .posts-section {
   display: flex;
   flex-direction: column;
