@@ -4,7 +4,7 @@ from pyexpat import model
 from statistics import mode
 from django import forms
 from user.models import Author
-from .models import Comment
+from .models import Comment, Post
 
 
 class CommentForm(forms.Form):
@@ -21,3 +21,9 @@ class CommetModelForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
+
+
+class PostModelForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ['author']

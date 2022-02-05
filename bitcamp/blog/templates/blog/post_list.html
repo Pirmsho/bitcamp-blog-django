@@ -15,7 +15,7 @@
 <center style="margin: auto;">
     {% if user.is_staff %}
     <br>
-    <a class="create-button" href="{% url 'blog:create_post' %}">Create New Post</a>
+    <a class="create-button" href="{% url 'blog:post_add' %}">ახალი პოსტის შექმნა</a>
     <br>
     {% endif %}
     <br>
@@ -24,8 +24,8 @@
     <div class="row">
         <form method="get" action="{% url 'blog:posts' %}">
             <input id="search_post" type="text" name="phrase" value="{{ request.GET.phrase }}">
-            <label for="search_post">Enter phrase</label>
-            <button class="create-button" type="submit" name="action">Find Post</button>
+            <label for="search_post"></label>
+            <button class="create-button" type="submit" name="action">პოსტის ძებნა ფრაზით</button>
         </form>
     </div>
 </center>

@@ -1,3 +1,7 @@
+from dataclasses import field
+from distutils.util import execute
+from http.server import executable
+from django import forms
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -7,7 +11,7 @@ from django.views.generic import (
     CreateView, UpdateView, DeleteView, DetailView, ListView)
 from django.urls import reverse_lazy, reverse
 from .models import Post
-from .forms import CommetModelForm
+from .forms import CommetModelForm, PostModelForm
 from django.contrib.auth import (authenticate, login, logout)
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -30,8 +34,6 @@ class PostListView(ListView):
         return Post.objects.filter(phrase_q).order_by('-pk')
 
 
-
-
 def posts(request):
     phrase_q = Q()
     q = request.GET.get('phrase')
@@ -52,10 +54,27 @@ class PostCreateView(CreateView):
     fields = '__all__'
     model = Post
 
+def post_add(request):
+    form = PostModelForm()
+    if request.method == 'POST':
+        if request.user.is_staff:
+            form = PostModelForm(request.POST, request.FILES)
+            print(form)
+            if form.is_valid():
+                postm = form.save(commit=False)
+                print(postm)
+                # postm.author = request.user.id
+                postm.author = Author.objects.get(pk=request.user.pk)
+                postm.save()
+                # კარგია თუ დამამახსოვრდება, სხვა დროსაც დამჭირდება
+                form.save_m2m()
+                return redirect(reverse("blog:posts"))
+    return render(request, 'blog/post_form.html', {'form':form})
+
 
 # აქ გვინდა რომ მხოლოდ პოსტის ავტორს შეეძლოს მოხვედრა
 class PostUpdateView(UpdateView):
-    fields = '__all__'
+    fields = ('title', 'description', 'text', 'category', 'image')
     model = Post
 
 
@@ -100,4 +119,3 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
-

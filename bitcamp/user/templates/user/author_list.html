@@ -19,10 +19,9 @@
                         <input type="submit" value="{{ item }}-ს პოსტები">
                     </form>
                 </li>
-                <li>
-                    <a href="{% url 'user:author' pk=item.pk %}">{{ item.username }}</a>
+                <li>მეტსახელი: {{ item.username }}
                 </li>
-                <li>{{ item.get_full_name }}</li>
+                <li>სახელი გვარი: {{ item.get_full_name }}</li>
             </ul>
         </li>
         <hr>

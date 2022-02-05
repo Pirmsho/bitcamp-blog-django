@@ -28,7 +28,7 @@ class MentorPostsView(ListView):
 
 
 class AutorListView(ListView):
-    queryset = Author.objects.filter(is_staff=True)
+    queryset = Author.objects.filter(is_staff=True).order_by('?')
     model = Author
 
 

@@ -9,9 +9,9 @@
 {% block content %}
 <center>
 
-    <h2>
-        all Post from {{ user }}
-    </h2>
+    <h2>{{ user }}-ის ყველა პოსტი:</h2>
+    <a href="{% url 'user:author_update' user.pk %}">პირადი მონაცემების განახლება</a>
+
     {% if post_list %}
 
     {% for post in post_list %}
@@ -31,6 +31,9 @@
                     <p>{{ category }}</p>
                 </a>
                 {% endfor %}
+                <a href="{% url 'blog:post_delete' post.pk %}" class="single-category text-danger">
+                    <p>Delete</p>
+                </a>
             </div>
         </div>
         <div class="categories">
@@ -74,29 +77,19 @@
                     {% endfor %}
                 </tbody>
             </table>
-    
+
         </div>
-        <br>
-        <br>
-        {% if user.is_authenticated %}
-        <div style="width: 100%;">
-            <form method="POST">
-                {% csrf_token %}
-                {{ com_form.as_p }}
-                <input type="hidden" name="id" value="{{ user.pk }}">
-                <input type="submit" value="Submit">
-            </form>
-            {% endif %}
-        </div>
+
     </article>
 
+    <br>
     {% endfor %}
     {% else %}
     <h3>
         {{user | title }} You Have not Posts Yet.
     </h3>
     {% endif %}
-    
+
 </center>
 
 {% endblock %}
