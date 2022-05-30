@@ -44,15 +44,15 @@
 <article class="single-post">
     <div class="single-post-header">
         <h3>
-            Comments:
+            კომენტარები:
         </h3>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">author</th>
-                    <th scope="col">Comment</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">ავტორი</th>
+                    <th scope="col">კომენტარი</th>
+                    <th scope="col">თარიღი</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +76,7 @@
             {% csrf_token %}
             {{ com_form.as_p }}
             <input type="hidden" name="id" value="{{ user.pk }}">
-            <input type="submit" value="Submit">
+            <input type="submit" value="კომენტარის დამატება">
         </form>
         {% endif %}
     </div>

@@ -11,17 +11,21 @@ from django.core.exceptions import ValidationError
 
 class AuthorForm(forms.ModelForm):
     password1 = forms.CharField(
-        label=_("Password"),
+        label=_("პაროლი"),
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
             help_text=password_validation.password_validators_help_text_html(),
             )
     password2 = forms.CharField(
-        label=_("Password confirmation"),
+        label=_("დაადასტურე პაროლი"),
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
                 help_text=_("Enter the same password as before, for verification."), 
         )
+    username = forms.CharField(label=_("ნიკი"), strip=False)
+    first_name = forms.CharField(label=_("სახელი"), strip=False)
+    last_name = forms.CharField(label=_("გვარი"), strip=False)
+    image = forms.CharField(label=_("სურათი"), strip=False)
     
     error_messages = {
         'password_mismatch': _('The two password fields don’t match.'),
@@ -31,8 +35,10 @@ class AuthorForm(forms.ModelForm):
         model = Author
         fields = ('username', 'first_name', 'last_name', 'image', 'password1', 'password2')
         widgets = {
-            'first_name': Input(attrs={'placeholder': 'Enter NName'}),
-            'last_name': Input(attrs={'placeholder': 'Enter Surname'}),
+            'first_name': Input(attrs={'placeholder': 'სახელი'}),
+            'last_name': Input(attrs={'placeholder': 'გვარი', 'name':'სახელი'}),
+            'password1': Input(attrs={'placeholder': 'სახელი'}),
+            'password2': Input(attrs={'placeholder': 'სახელი'}),
         }
 
 

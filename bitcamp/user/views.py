@@ -1,4 +1,5 @@
 from re import template
+from tkinter.ttk import Widget
 from django.db import models
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import (CreateView, UpdateView, DeleteView, DetailView, ListView)

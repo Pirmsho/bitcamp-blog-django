@@ -32,7 +32,7 @@
                 </a>
                 {% endfor %}
                 <a href="{% url 'blog:post_delete' post.pk %}" class="single-category text-danger">
-                    <p>Delete</p>
+                    <p>პოსტის წაშლა</p>
                 </a>
             </div>
         </div>
@@ -43,7 +43,7 @@
             </a>
             {% endfor %}
             <a href="{% url 'blog:post_update' post.pk %}" class="single-category text-danger">
-                <p>Update</p>
+                <p>პოსტის განახლება</p>
             </a>
         </div>
         <div class="single-post-body">
@@ -52,17 +52,17 @@
     </article>
     <article class="single-post">
         <div class="single-post-header">
-            <h3>
-                Comments:
-            </h3>
+            <h4>
+                კომენტარები:
+            </h4>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">author</th>
-                        <th scope="col">Comment</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">ავტორი</th>
+                        <th scope="col">კომენტარი</th>
+                        <th scope="col">თარიღი</th>
+                        <th scope="col">წაშლა</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,7 +72,7 @@
                         <td>{{item.author}}</td>
                         <td>{{item.text}}</td>
                         <td>{{item.created_date}}</td>
-                        <td><a href="{% url 'blog:comment_delete' item.pk %}">Delete</a></td>
+                        <td><a href="{% url 'blog:comment_delete' item.pk %}">კომენტარის წაშლა</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
