@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
 from sqlalchemy import null
-from accounts.models import Account
+from user.models import Author
 from django.contrib.auth.models import User
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
@@ -28,7 +28,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     text = RichTextField(blank=True, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category)
@@ -47,12 +47,12 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(
         Post, related_name='comments', on_delete=models.CASCADE)
-    author = models.ForeignKey(Account, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True, default="anonymous")
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse("post_list")
+        return reverse("blog:post", pk=self.post.pk)
 
     def __str__(self):
         return self.text

@@ -5,7 +5,9 @@
             x-data="{isMobile: (window.innerWidth < 1000) ? true : false}">
             <div class="first-nav-item" x-show="!isMobile" x-transition.duration.500ms>
                 <a href="{% url 'blog:posts' %}"><li class="main-nav-item">პოსტები</li></a> 
-                <a href="#"><li class="main-nav-item">კატეგორიები</li></a> 
+                <a href="{% url 'blog:categories' %}"><li class="main-nav-item">კატეგორიები</li></a> 
+                <!-- დროებით რომ იყოს ხელს თუ არ გიშლის, მარტივად რომ გადავიდე უსრებზე -->
+                <a href="{% url 'user:authors' %}"><li class="main-nav-item">მენტორები</li></a> 
                 
             </div>
             <div class="second-nav-item">
@@ -16,15 +18,15 @@
                  x-show="!isMobile" x-transition.duration.500ms>
 
                  {% comment %} 
-                აქ იქნება if check, თუ მომხმარებელი არაა ავტორიზებული მაშინ ეს
+                აქ იქნება if check, თუ მომხმარებელი ავტორიზებულია მაშინ ეს
                 {% endcomment %}
 
                 {% if user.is_authenticated  %}
-                <a href="#"><li class="main-nav-item">{{user }}-ის პროფილი</li></a>
-                <a href="{% url 'blog:logout' %}"><li class="main-nav-item">ლოგაუთი</li></a>
+                <a href="{% url 'user:profile' user.pk %}"><li class="main-nav-item">სალამი {{user }}</li></a>
+                <a href="{% url 'user:logout' %}"><li class="main-nav-item">ლოგაუთი</li></a>
                 {% else %}
-                <a href="#"><li class="main-nav-item">ავტორიზაცია</li></a>
-                <a href="#"><li class="main-nav-item">რეგისტრაცია</li></a>
+                <a href="{% url 'user:login' %}"><li class="main-nav-item">ავტორიზაცია</li></a>
+                <a href="{% url 'user:register' %}"><li class="main-nav-item">რეგისტრაცია</li></a>
                 {% endif %}
             </div>
         </ul>
